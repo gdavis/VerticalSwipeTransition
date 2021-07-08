@@ -16,9 +16,10 @@
 		7764074F2696866F002ED665 /* ModalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7764074E2696866F002ED665 /* ModalViewController.swift */; };
 		7764075226968AC9002ED665 /* TransitionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7764075126968AC9002ED665 /* TransitionController.swift */; };
 		7764075426968ADE002ED665 /* VSwipeDismissalInteractionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7764075326968ADE002ED665 /* VSwipeDismissalInteractionController.swift */; };
-		7764075626968AF4002ED665 /* TransitionAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7764075526968AF4002ED665 /* TransitionAnimator.swift */; };
+		7764075626968AF4002ED665 /* VerticalSlideTransitionAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7764075526968AF4002ED665 /* VerticalSlideTransitionAnimator.swift */; };
 		776407582696AC81002ED665 /* VSwipePresentationInteractionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 776407572696AC81002ED665 /* VSwipePresentationInteractionController.swift */; };
 		7764075B2696ACA7002ED665 /* InteractionControlling.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7764075A2696ACA7002ED665 /* InteractionControlling.swift */; };
+		77A2AF27269792890088271A /* TransitionAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77A2AF26269792890088271A /* TransitionAnimator.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -33,9 +34,10 @@
 		7764074E2696866F002ED665 /* ModalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModalViewController.swift; sourceTree = "<group>"; };
 		7764075126968AC9002ED665 /* TransitionController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransitionController.swift; sourceTree = "<group>"; };
 		7764075326968ADE002ED665 /* VSwipeDismissalInteractionController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VSwipeDismissalInteractionController.swift; sourceTree = "<group>"; };
-		7764075526968AF4002ED665 /* TransitionAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransitionAnimator.swift; sourceTree = "<group>"; };
+		7764075526968AF4002ED665 /* VerticalSlideTransitionAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerticalSlideTransitionAnimator.swift; sourceTree = "<group>"; };
 		776407572696AC81002ED665 /* VSwipePresentationInteractionController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VSwipePresentationInteractionController.swift; sourceTree = "<group>"; };
 		7764075A2696ACA7002ED665 /* InteractionControlling.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InteractionControlling.swift; sourceTree = "<group>"; };
+		77A2AF26269792890088271A /* TransitionAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransitionAnimator.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -86,7 +88,7 @@
 			children = (
 				776407592696AC9D002ED665 /* Protocols */,
 				7764075126968AC9002ED665 /* TransitionController.swift */,
-				7764075526968AF4002ED665 /* TransitionAnimator.swift */,
+				7764075526968AF4002ED665 /* VerticalSlideTransitionAnimator.swift */,
 				776407572696AC81002ED665 /* VSwipePresentationInteractionController.swift */,
 				7764075326968ADE002ED665 /* VSwipeDismissalInteractionController.swift */,
 			);
@@ -96,6 +98,7 @@
 		776407592696AC9D002ED665 /* Protocols */ = {
 			isa = PBXGroup;
 			children = (
+				77A2AF26269792890088271A /* TransitionAnimator.swift */,
 				7764075A2696ACA7002ED665 /* InteractionControlling.swift */,
 			);
 			path = Protocols;
@@ -172,12 +175,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				7764074F2696866F002ED665 /* ModalViewController.swift in Sources */,
-				7764075626968AF4002ED665 /* TransitionAnimator.swift in Sources */,
+				7764075626968AF4002ED665 /* VerticalSlideTransitionAnimator.swift in Sources */,
 				7764073F26968556002ED665 /* ViewController.swift in Sources */,
 				7764073B26968556002ED665 /* AppDelegate.swift in Sources */,
 				7764075B2696ACA7002ED665 /* InteractionControlling.swift in Sources */,
 				7764075226968AC9002ED665 /* TransitionController.swift in Sources */,
 				7764075426968ADE002ED665 /* VSwipeDismissalInteractionController.swift in Sources */,
+				77A2AF27269792890088271A /* TransitionAnimator.swift in Sources */,
 				776407582696AC81002ED665 /* VSwipePresentationInteractionController.swift in Sources */,
 				7764073D26968556002ED665 /* SceneDelegate.swift in Sources */,
 			);

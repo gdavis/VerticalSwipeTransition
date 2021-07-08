@@ -11,14 +11,12 @@ import UIKit
 
 class TransitionController<Animator: TransitionAnimator>: NSObject, UIViewControllerTransitioningDelegate {
 
-    let interactionController: InteractionControlling
+    let presentationInteractionController: InteractionControlling
+    let dismissalInteractionController: InteractionControlling
 
-    init(interactionController: InteractionControlling) {
-        self.interactionController = interactionController
-    }
-
-    deinit {
-        assertionFailure()
+    init(presentationInteractionController: InteractionControlling, dismissalInteractionController: InteractionControlling) {
+        self.presentationInteractionController = presentationInteractionController
+        self.dismissalInteractionController = dismissalInteractionController
     }
 
     func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
@@ -30,12 +28,12 @@ class TransitionController<Animator: TransitionAnimator>: NSObject, UIViewContro
     }
 
     func interactionControllerForPresentation(using animator: UIViewControllerAnimatedTransitioning) -> UIViewControllerInteractiveTransitioning? {
-        interactionController
+        presentationInteractionController
     }
 
     func interactionControllerForDismissal(using animator: UIViewControllerAnimatedTransitioning) -> UIViewControllerInteractiveTransitioning? {
-        guard interactionController.isInteractionInProgress else { return nil }
+        guard dismissalInteractionController.isInteractionInProgress else { return nil }
 
-        return interactionController
+        return dismissalInteractionController
     }
 }

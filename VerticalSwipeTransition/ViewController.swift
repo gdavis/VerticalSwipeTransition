@@ -14,9 +14,11 @@ class ViewController: UIViewController {
     @IBOutlet var swipeView: UIView!
 
     let presentationTransitionController = VSwipePresentationInteractionController()
+    let dismissalTransitionController = VSwipePresentationInteractionController()
 
     lazy var transitionController = TransitionController<VerticalSlideTransitionAnimator>(
-        interactionController: presentationTransitionController
+        presentationInteractionController: presentationTransitionController,
+        dismissalInteractionController: dismissalTransitionController
     )
 
     lazy var panGesture: UIPanGestureRecognizer = {

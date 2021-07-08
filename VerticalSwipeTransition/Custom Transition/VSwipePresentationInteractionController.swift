@@ -19,15 +19,21 @@ class VSwipePresentationInteractionController: NSObject, InteractionControlling 
 
     private var externalGesture: UIPanGestureRecognizer?
 
+    private var transitionContext: UIViewControllerContextTransitioning?
+    private var transitionAnimator: UIViewPropertyAnimator?
+
+    /// Tracks the position of the view when an interruption occurs
+    /// which is then used to offset the translation of a new gesture
+    /// panning phase.
     private lazy var interruptedTranslation: CGFloat = 0
+
+    /// Gesture that is used to interrupt an animator transitioning to the finish or
+    /// cancelled state, that allows the user to restart interactivity.
     private lazy var interruptionGesture: UIPanGestureRecognizer = {
         let gesture = UIPanGestureRecognizer(target: self, action: #selector(gestureAction(_:)))
         gesture.delaysTouchesBegan = false
         return gesture
     }()
-
-    private var transitionContext: UIViewControllerContextTransitioning?
-    private var transitionAnimator: UIViewPropertyAnimator?
 }
 
 
