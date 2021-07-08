@@ -1,5 +1,5 @@
 //
-//  VSwipePresentationInteractionController.swift
+//  VSwipeInteractionController.swift
 //  VerticalSwipeTransition
 //
 //  Created by Grant Davis on 7/7/21.
@@ -8,46 +8,84 @@
 import Foundation
 import UIKit
 
+// TODO:(grant) Scroll view support
+// TODO:(grant) Support initial offset option (so we don't always start at the bottom of the screen, perhaps behind another view as well)
+
+
+/// Protocol used to provide crutial metrics that
+/// determine how the interactive transition performs.
+///
+/// This protocol is adopted by different objects to
+/// provide metrics for the presentation and
+/// dismissal of the view.
+///
+/// Since much of the logic to handle the logic
+/// for managing the transition is similar for both
+/// presentation and dismissal, this protocol
+/// gives us a specific place to determine how the
+/// math should be different when going between
+/// the presentation and dismissal of a view.
+///
 private protocol VSwipeMetric {
+    /// Provides the view controller that is the target for the pan slide transition.
+    /// This is the "to" view duration presentation, and the "from" view on dismissal.
+    /// - Parameter transitionContext: The context information for the transition.
     func targetViewController(transitionContext: UIViewControllerContextTransitioning) -> UIViewController?
 
+    /// Returns the initial frame for the target view controller
+    /// - Parameter transitionContext: The context information for the transition.
     func initialPresentationFrame(transitionContext: UIViewControllerContextTransitioning) -> CGRect?
 
+    /// Returns the final frame for the target view controller
+    /// - Parameter transitionContext: The context information for the transition.
     func finalPresentationFrame(transitionContext: UIViewControllerContextTransitioning) -> CGRect?
 
+    /// Returns the y position for the target view controller from the given progress and interaction distance.
+    /// - Parameters:
+    ///   - transitionContext: The context information for the transition.
+    ///   - progress: The current progress of the transition, from 0-1.
+    ///   - interactionDistance: The amount of distance that the target view can travel.
     func verticalPosition(transitionContext: UIViewControllerContextTransitioning, progress: CGFloat, interactionDistance: CGFloat) -> CGFloat
 
+    /// Returns a boolean that indicates if the transition should finish or cancel given the current progress and gesture velocity.
+    /// - Parameters:
+    ///   - progress: The current progress of the transition, from 0-1.
+    ///   - velocity: The current vertical velocity of the pan gesture.
     func shouldFinishTransition(progress: CGFloat, velocity: CGFloat) -> Bool
 
+    /// Returns the amount of translation when a gesture interruption occurs.
+    /// - Parameter transitionContext: The context information for the transition.
     func interruptionTranslation(transitionContext: UIViewControllerContextTransitioning) -> CGFloat
 
+    /// The current progress of the transition given the amount of gesture translation and distance.
+    /// - Parameters:
+    ///   - verticalTranslation: The amount of vertical translation from the pan gesture.
+    ///   - interactionDistance: The amount of distance that the target view can travel.
     func progress(verticalTranslation: CGFloat, interactionDistance: CGFloat) -> CGFloat
 }
 
-class VSwipePresentationInteractionController: NSObject, InteractionControlling {
+
+/// Object that controls user input during an interactive transition.
+class VSwipeInteractionController: NSObject, InteractionControlling {
 
     private class PresentationMetrics: VSwipeMetric {
         func targetViewController(transitionContext: UIViewControllerContextTransitioning) -> UIViewController? {
-            guard let presentedViewController = transitionContext.viewController(forKey: .to) else { return nil }
-            return presentedViewController
+            transitionContext.viewController(forKey: .to)
         }
 
         func initialPresentationFrame(transitionContext: UIViewControllerContextTransitioning) -> CGRect? {
             guard let presentedViewController = transitionContext.viewController(forKey: .to) else { return nil }
-
             let containerFrame = transitionContext.containerView.frame
             return CGRect(origin: CGPoint(x: containerFrame.minX, y: containerFrame.maxY), size: presentedViewController.view.frame.size)
         }
 
         func finalPresentationFrame(transitionContext: UIViewControllerContextTransitioning) -> CGRect? {
             guard let presentedViewController = transitionContext.viewController(forKey: .to) else { return nil }
-
             return transitionContext.finalFrame(for: presentedViewController)
         }
 
         func verticalPosition(transitionContext: UIViewControllerContextTransitioning, progress: CGFloat, interactionDistance: CGFloat) -> CGFloat {
             guard let presentedFinalFrame = finalPresentationFrame(transitionContext: transitionContext) else { return 0 }
-
             return presentedFinalFrame.maxY - interactionDistance * progress
         }
 
@@ -70,13 +108,11 @@ class VSwipePresentationInteractionController: NSObject, InteractionControlling 
 
     private class DismissalMetrics: VSwipeMetric {
         func targetViewController(transitionContext: UIViewControllerContextTransitioning) -> UIViewController? {
-            guard let dismissedViewController = transitionContext.viewController(forKey: .from) else { return nil }
-            return dismissedViewController
+            transitionContext.viewController(forKey: .from)
         }
 
         func initialPresentationFrame(transitionContext: UIViewControllerContextTransitioning) -> CGRect? {
             guard let dismissedViewController = transitionContext.viewController(forKey: .from) else { return nil }
-
             return transitionContext.initialFrame(for: dismissedViewController)
         }
 
@@ -91,7 +127,6 @@ class VSwipePresentationInteractionController: NSObject, InteractionControlling 
             guard let targetViewController = transitionContext.viewController(forKey: .from) else { return 0 }
 
             let initialFrame = transitionContext.initialFrame(for: targetViewController)
-
             return initialFrame.minY + interactionDistance * progress
         }
 
@@ -101,7 +136,6 @@ class VSwipePresentationInteractionController: NSObject, InteractionControlling 
 
         func interruptionTranslation(transitionContext: UIViewControllerContextTransitioning) -> CGFloat {
             guard let targetViewController = transitionContext.viewController(forKey: .from) else { return 0 }
-
             return -targetViewController.view.frame.minY
         }
 
@@ -110,8 +144,15 @@ class VSwipePresentationInteractionController: NSObject, InteractionControlling 
         }
     }
 
+    /// The current phase for the interaction. This can be either `presenting` or `dismissing`,
+    /// and determines which metrics are used to perform calculations for the transition.
+    ///
+    /// This value is set by the `TransitionController` when vending this an interactive
+    /// transition controller. This must be set properly to perform the transition successfully.
+    ///
     var interactionPhase: InteractionPhase?
 
+    // The current set of metrics to use for the current interaction phase.
     private var currentMetric: VSwipeMetric {
         switch interactionPhase {
         case .none, .presenting:
@@ -121,19 +162,30 @@ class VSwipePresentationInteractionController: NSObject, InteractionControlling 
         }
     }
 
+    // Object that provides the presentation metrics for the transition.
     private lazy var presentationMetrics: VSwipeMetric = PresentationMetrics()
+
+    // Object that provides the dismissal metrics for the transition.
     private lazy var dismissalMetrics: VSwipeMetric = DismissalMetrics()
 
+    // The duration for the finish and cancel animations when a gesture's
+    // interaction has finished and we animate to the final position.
     private let finalAnimationDuration: TimeInterval = 0.6
 
+    // The view controller that is being presented by the transition.
     private(set) weak var targetViewController: UIViewController?
 
+    // TODO:(grant) finish scroll view support
     private(set) weak var scrollView: UIScrollView?
 
+    // Boolean that determines if this controller is currently
+    // engaged in an interactive transition.
     private(set) var isInteractionInProgress: Bool = false
 
+    // The amount of distance that can be travelled when panning.
     private var interactionDistance: CGFloat = 0
 
+    // The final frame of the target view controller for the current transition phase.
     private var presentedFinalFrame: CGRect = .zero
 
     /// Gesture that is available to external objects to trigger the start of
@@ -144,7 +196,10 @@ class VSwipePresentationInteractionController: NSObject, InteractionControlling 
         return gesture
     }()
 
+    // The transition context for the active transition.
     private weak var transitionContext: UIViewControllerContextTransitioning?
+
+    // The animation that animates to the finished or cancelled position.
     private var transitionAnimator: UIViewPropertyAnimator?
 
     /// Tracks the position of the view when an interruption occurs
@@ -164,7 +219,7 @@ class VSwipePresentationInteractionController: NSObject, InteractionControlling 
 
 // MARK: - <UIViewControllerInteractiveTransitioning>
 
-extension VSwipePresentationInteractionController {
+extension VSwipeInteractionController {
 
     func startInteractiveTransition(_ transitionContext: UIViewControllerContextTransitioning) {
         guard let presentedViewController = transitionContext.viewController(forKey: .to)
@@ -198,10 +253,11 @@ extension VSwipePresentationInteractionController {
 
 // MARK: - Transition Completion
 
-private extension VSwipePresentationInteractionController {
+private extension VSwipeInteractionController {
 
     func finish() {
         print(#function)
+
         enableOtherTouches()
         transitionContext?.finishInteractiveTransition()
         transitionContext?.completeTransition(true)
@@ -255,7 +311,7 @@ private extension VSwipePresentationInteractionController {
 
 // MARK: - Gesture Handling
 
-extension VSwipePresentationInteractionController {
+extension VSwipeInteractionController {
 
     struct GestureStatus {
         let verticalTranslation: CGFloat
@@ -271,21 +327,16 @@ extension VSwipePresentationInteractionController {
             verticalTranslation: gesture.translation(in: gesture.view).y - interruptedTranslation,
             velocity: gesture.velocity(in: gesture.view)
         )
-//        print(#function + "translation: \(status.verticalTranslation), velocity: \(status.verticalVelocity)")
 
         switch gesture.state {
         case .began:
             gestureBegan(status)
-
         case .changed:
             gestureChanged(status)
-
         case .ended:
             gestureEnded(status)
-
         case .cancelled:
             gestureCancelled(status)
-
         default:
             break
         }
@@ -294,9 +345,12 @@ extension VSwipePresentationInteractionController {
     private func gestureBegan(_ status: GestureStatus) {
         guard let transitionContext = transitionContext
         else {
+            // if we are currently in a presenting state but have no transition
+            // context, then this gesture is triggering a new dismissal interaction
             if interactionPhase == .presenting {
                 print("Starting dismissal from pan gesture")
 
+                // mark that we have started a new interactive transition
                 isInteractionInProgress = true
 
                 // if we have a gesture starting, but we are not yet started a interactive transition,
@@ -307,15 +361,18 @@ extension VSwipePresentationInteractionController {
             return
         }
 
-//        print(#function)
-
-        // if the user restarts a pan gesture, we want to cancel
+        // if the user starts a new pan gesture, we want to cancel
         // the existing transition animation so we can
         // begin the dragging of the view again to keep things
         // fully interactive, even while animating to a
         // finish or cancel position in the view.
         transitionAnimator?.stopAnimation(true)
 
+        // if an interaction is currently in progress,
+        // then we will track the current position of the
+        // view and use that as a translation offset for
+        // the new gesture, keeping the position in line
+        // with where it was interrupted.
         if isInteractionInProgress {
             // store the distance of the presented view to the final frame position,
             // and later use it to include in the interrupted gesture's translation
@@ -345,6 +402,9 @@ extension VSwipePresentationInteractionController {
             performCancelTransition(status)
         }
 
+        // once a gesture ends, install the interruption gesture
+        // that will be able to cancel the in-progress animation
+        // and resume the interactive translation tracking.
         installInterruptionGesture()
     }
 
@@ -356,7 +416,7 @@ extension VSwipePresentationInteractionController {
 
 // MARK: - Progress Update
 
-private extension VSwipePresentationInteractionController {
+private extension VSwipeInteractionController {
 
     private func updatePresentedView(_ progress: CGFloat) {
         guard let transitionContext = transitionContext,
@@ -383,7 +443,7 @@ private extension VSwipePresentationInteractionController {
 
 // MARK: - Interruption Gesture
 
-private extension VSwipePresentationInteractionController {
+private extension VSwipeInteractionController {
 
     func installInterruptionGesture() {
         // setup a custom pan gesture within the container to respond
@@ -399,14 +459,13 @@ private extension VSwipePresentationInteractionController {
 
 // MARK: - Ending Transition Animations
 
-private extension VSwipePresentationInteractionController {
+private extension VSwipeInteractionController {
 
     func performFinishTransition(_ status: GestureStatus) {
         guard let transitionContext = transitionContext,
               let targetViewController = targetViewController,
               let finalFrame = currentMetric.finalPresentationFrame(transitionContext: transitionContext)
         else {
-//            assertionFailure("Presented view controller not defined, unable to finish transition")
             return
         }
 
@@ -434,7 +493,6 @@ private extension VSwipePresentationInteractionController {
               let targetViewController = targetViewController,
               let initialFrame = currentMetric.initialPresentationFrame(transitionContext: transitionContext)
         else {
-//            assertionFailure("Presented view controller not defined, unable to finish transition")
             return
         }
 
@@ -469,7 +527,7 @@ private extension VSwipePresentationInteractionController {
     }
 }
 
-private extension VSwipePresentationInteractionController {
+private extension VSwipeInteractionController {
     func disableOtherTouches() {
         guard let targetViewController = targetViewController
         else {
@@ -496,7 +554,7 @@ private extension VSwipePresentationInteractionController {
 }
 
 
-extension VSwipePresentationInteractionController: UIGestureRecognizerDelegate {
+extension VSwipeInteractionController: UIGestureRecognizerDelegate {
 
     func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
         if let scrollView = scrollView {

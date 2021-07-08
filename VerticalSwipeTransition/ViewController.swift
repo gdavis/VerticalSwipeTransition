@@ -13,7 +13,7 @@ class ViewController: UIViewController {
 
     @IBOutlet var swipeView: UIView!
 
-    let interactionController = VSwipePresentationInteractionController()
+    let interactionController = VSwipeInteractionController()
 
     lazy var transitionController = TransitionController<VerticalSlideTransitionAnimator>(
         interactionController: interactionController
