@@ -8,6 +8,7 @@
 import Foundation
 import UIKit
 
+// TODO:(grant) Add ability to cancel a transition with a velocity in the opposite direction of success.
 // TODO:(grant) Scroll view support
 // TODO:(grant) Support initial offset option (so we don't always start at the bottom of the screen, perhaps behind another view as well)
 
