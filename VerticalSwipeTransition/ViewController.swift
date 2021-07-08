@@ -13,31 +13,24 @@ class ViewController: UIViewController {
 
     @IBOutlet var swipeView: UIView!
 
-    let presentationTransitionController = VSwipePresentationInteractionController()
-    let dismissalTransitionController = VSwipePresentationInteractionController()
+    let interactionController = VSwipePresentationInteractionController()
 
     lazy var transitionController = TransitionController<VerticalSlideTransitionAnimator>(
-        presentationInteractionController: presentationTransitionController,
-        dismissalInteractionController: dismissalTransitionController
+        interactionController: interactionController
     )
-
-    lazy var panGesture: UIPanGestureRecognizer = {
-        let gesture = UIPanGestureRecognizer(target: self, action: #selector(gestureAction))
-        return gesture
-    }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // configure the transition controller so it may respond
-        // to the gesture events from the gestured embedded in the button area.
-        presentationTransitionController.configure(forGesture: panGesture)
+        // take the interaction controller's guestre and add it to our invoking view
+        swipeView.addGestureRecognizer(interactionController.externalGesture)
 
-        swipeView.addGestureRecognizer(panGesture)
+        // listen for the gesture's state to invoke presentation of the modal
+        interactionController.externalGesture.addTarget(self, action: #selector(gestureAction))
     }
 
     @objc func gestureAction() {
-        guard presentationTransitionController.isInteractionInProgress == false else { return }
+        guard interactionController.isInteractionInProgress == false else { return }
 
         print("presenting view controller")
 
