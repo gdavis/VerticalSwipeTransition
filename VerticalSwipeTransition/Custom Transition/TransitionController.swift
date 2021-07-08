@@ -29,6 +29,10 @@ class TransitionController<Animator: TransitionAnimator>: NSObject, UIViewContro
         Animator(presenting: false)
     }
 
+    func interactionControllerForPresentation(using animator: UIViewControllerAnimatedTransitioning) -> UIViewControllerInteractiveTransitioning? {
+        interactionController
+    }
+
     func interactionControllerForDismissal(using animator: UIViewControllerAnimatedTransitioning) -> UIViewControllerInteractiveTransitioning? {
         guard interactionController.isInteractionInProgress else { return nil }
 

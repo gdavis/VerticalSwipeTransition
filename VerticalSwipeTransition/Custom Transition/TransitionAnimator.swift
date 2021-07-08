@@ -15,6 +15,7 @@ protocol TransitionAnimator: UIViewControllerAnimatedTransitioning {
 class VerticalSlideTransitionAnimator: NSObject, TransitionAnimator {
 
     let presenting: Bool
+    let animationDuration: TimeInterval = 0.35
 
     required init(presenting: Bool) {
         self.presenting = presenting
@@ -22,7 +23,7 @@ class VerticalSlideTransitionAnimator: NSObject, TransitionAnimator {
     }
 
     func transitionDuration(using transitionContext: UIViewControllerContextTransitioning?) -> TimeInterval {
-        3
+        animationDuration
     }
 
     func animateTransition(using transitionContext: UIViewControllerContextTransitioning) {

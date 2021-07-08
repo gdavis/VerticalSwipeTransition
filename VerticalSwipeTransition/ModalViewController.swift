@@ -23,6 +23,7 @@ class ModalViewController: UIViewController {
     }()
 
     @objc func dismissView() {
+        print(#function)
         dismiss(animated: true, completion: nil)
     }
 

@@ -9,58 +9,39 @@ import UIKit
 
 class ViewController: UIViewController {
 
+    var contentScrollView: UIScrollView?
+
     @IBOutlet var swipeView: UIView!
 
-    let interactionController = InteractionController()
+    let presentationTransitionController = VSwipePresentationInteractionController()
+
     lazy var transitionController = TransitionController<VerticalSlideTransitionAnimator>(
-        interactionController: interactionController
+        interactionController: presentationTransitionController
     )
 
     lazy var panGesture: UIPanGestureRecognizer = {
-        let gesture = UIPanGestureRecognizer()
-        gesture.addTarget(self, action: #selector(gestureAction))
+        let gesture = UIPanGestureRecognizer(target: self, action: #selector(gestureAction))
         return gesture
     }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        // configure the transition controller so it may respond
+        // to the gesture events from the gestured embedded in the button area.
+        presentationTransitionController.configure(forGesture: panGesture)
+
         swipeView.addGestureRecognizer(panGesture)
     }
 
     @objc func gestureAction() {
-        switch panGesture.state {
-        case .began:
-            gestureStarted()
+        guard presentationTransitionController.isInteractionInProgress == false else { return }
 
-        case .changed:
-            gestureChanged()
-
-        case .ended:
-            gestureEnded()
-
-        default:
-            break
-        }
-    }
-}
-
-private extension ViewController {
-
-    func gestureStarted() {
-        interactionController.verticalPanGesture = panGesture
+        print("presenting view controller")
 
         let viewController = ModalViewController()
         viewController.transitioningDelegate = transitionController
         viewController.modalPresentationStyle = .custom
         present(viewController, animated: true, completion: nil)
-    }
-
-    func gestureChanged() {
-
-    }
-
-    func gestureEnded() {
-
     }
 }

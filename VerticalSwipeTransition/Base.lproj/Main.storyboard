@@ -3,6 +3,7 @@
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <capability name="Image references" minToolsVersion="12.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -16,27 +17,41 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="JA2-6i-v9D">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JA2-6i-v9D">
                                 <rect key="frame" x="0.0" y="804" width="414" height="92"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
-                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="minus" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="21t-u8-6CA">
-                                        <rect key="frame" x="183" y="9" width="49" height="11"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="21t-u8-6CA">
+                                        <rect key="frame" x="177" y="9" width="60" height="8"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="60" id="MuH-0p-bjC"/>
+                                            <constraint firstAttribute="height" constant="24.5" id="pEf-3I-pZH"/>
+                                        </constraints>
+                                        <imageReference key="image" image="minus" catalog="system" symbolScale="default" renderingMode="template"/>
                                     </imageView>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Swipe Up" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lgB-NW-dvu">
-                                        <rect key="frame" x="171" y="23" width="73" height="21"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Swipe Up" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lgB-NW-dvu">
+                                        <rect key="frame" x="170.5" y="23" width="73" height="21"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemOrangeColor"/>
+                                <constraints>
+                                    <constraint firstItem="lgB-NW-dvu" firstAttribute="centerX" secondItem="JA2-6i-v9D" secondAttribute="centerX" id="IxP-hp-ASx"/>
+                                    <constraint firstAttribute="height" constant="92" id="MID-H5-bCd"/>
+                                    <constraint firstItem="lgB-NW-dvu" firstAttribute="top" secondItem="JA2-6i-v9D" secondAttribute="top" constant="23" id="N6G-IV-CHP"/>
+                                    <constraint firstItem="21t-u8-6CA" firstAttribute="top" secondItem="JA2-6i-v9D" secondAttribute="top" id="WZj-F0-lTK"/>
+                                    <constraint firstItem="21t-u8-6CA" firstAttribute="centerX" secondItem="JA2-6i-v9D" secondAttribute="centerX" id="uGL-xC-sin"/>
+                                </constraints>
                             </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="JA2-6i-v9D" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="KOQ-Ag-Xau"/>
+                            <constraint firstItem="JA2-6i-v9D" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="OEf-dZ-LDi"/>
+                            <constraint firstAttribute="bottom" secondItem="JA2-6i-v9D" secondAttribute="bottom" id="k27-bi-6ld"/>
+                        </constraints>
                     </view>
                     <connections>
                         <outlet property="swipeView" destination="JA2-6i-v9D" id="GTJ-zl-cwP"/>
