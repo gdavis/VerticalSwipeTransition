@@ -76,13 +76,14 @@ private extension VerticalSlideTransitionAnimator {
         }
 
         let containerView = transitionContext.containerView
-        let fromViewFrame = CGRect(x: 0, y: containerView.frame.maxY, width: containerView.frame.width, height: containerView.frame.height)
+        let finalFrame = transitionContext.finalFrame(for: originViewController)
+            .offsetBy(dx: 0, dy: containerView.frame.maxY)
 
         let animationCurve: UIView.AnimationCurve = .easeInOut
         let animator = UIViewPropertyAnimator(duration: transitionDuration(using: transitionContext),
                                               curve: animationCurve)
         {
-            originViewController.view.frame = fromViewFrame
+            originViewController.view.frame = finalFrame
             destinationViewController.view.transform = .identity
         }
 

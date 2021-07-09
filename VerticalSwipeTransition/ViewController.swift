@@ -28,12 +28,20 @@ class ViewController: UIViewController {
         // listen for the gesture's state to invoke presentation of the modal
         interactionController.externalGesture.addTarget(self, action: #selector(gestureAction))
 
-        // add a bottom inset that starts the gesture on the bottom button area
-        interactionController.presentationMetrics.bottomInset = -swipeView.frame.height
-        interactionController.dismissalMetrics.bottomInset = -swipeView.frame.height
+        // prevent the view from going beyond the top (into negative y positions)
+        interactionController.presentationMetrics.topMaxY = 0
+        interactionController.dismissalMetrics.topMaxY = 0
+
+        // use a custom presentation controller to customize the size
+        // of the presented view controller
+        transitionController.presentationControllerProvider = self
     }
 
     @objc func gestureAction() {
+        // do not try to present again if an interaction is in progress.
+        // without this, we would attempt to present the same view controller
+        // multiple times while the transition is running, causing inconsistencies
+        // in the view transition process.
         guard interactionController.isInteractionInProgress == false else { return }
 
         print("presenting view controller")
@@ -42,5 +50,11 @@ class ViewController: UIViewController {
         viewController.transitioningDelegate = transitionController
         viewController.modalPresentationStyle = .custom
         present(viewController, animated: true, completion: nil)
+    }
+}
+
+extension ViewController: PresentationControllerProvider {
+    func presentationController(forPresented presented: UIViewController, presenting: UIViewController?, source: UIViewController) -> UIPresentationController {
+        VSwipePresentationController(presentedViewController: presented, presenting: presenting)
     }
 }

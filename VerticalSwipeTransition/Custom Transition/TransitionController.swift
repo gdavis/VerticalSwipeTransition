@@ -8,13 +8,22 @@
 import Foundation
 import UIKit
 
+protocol PresentationControllerProvider {
+    func presentationController(forPresented presented: UIViewController, presenting: UIViewController?, source: UIViewController) -> UIPresentationController
+}
 
 class TransitionController<Animator: TransitionAnimator>: NSObject, UIViewControllerTransitioningDelegate {
 
     let interactionController: InteractionControlling
+    var presentationControllerProvider: PresentationControllerProvider?
 
-    init(interactionController: InteractionControlling) {
+    init(interactionController: InteractionControlling, presentationControllerProvider: PresentationControllerProvider? = nil) {
         self.interactionController = interactionController
+        self.presentationControllerProvider = presentationControllerProvider
+    }
+
+    func presentationController(forPresented presented: UIViewController, presenting: UIViewController?, source: UIViewController) -> UIPresentationController? {
+        presentationControllerProvider?.presentationController(forPresented: presented, presenting: presenting, source: source)
     }
 
     func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {

@@ -31,8 +31,16 @@ class ModalViewController: UIViewController {
         super.viewDidLoad()
 
         view.backgroundColor = .systemPink
-
         view.addSubview(dismissButton)
+        dismissButton.center = view.center
+        
+        view.layer.borderColor = UIColor.green.cgColor
+        view.layer.borderWidth = 5
+    }
+
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+
         dismissButton.center = view.center
     }
 }
