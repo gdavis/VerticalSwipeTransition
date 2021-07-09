@@ -1,4 +1,5 @@
 # VerticalSwipeTransition
+An interactive, interruptible, and customizable vertical swipe transition for iOS. 
 
 ![20210709123457252](https://user-images.githubusercontent.com/110691/125122262-66e4c000-e0b2-11eb-897a-848dcec27738.gif)
 
@@ -79,3 +80,4 @@ A big thanks to [Daniel Gauthier](https://danielgauthier.me/) for writing articl
 
 
 # License
+MIT License
