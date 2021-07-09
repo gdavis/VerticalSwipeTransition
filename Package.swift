@@ -4,7 +4,7 @@
 import PackageDescription
 
 let package = Package(
-    name: "GDIVerticalSwipeTransition",
+    name: "VerticalSwipeTransition",
     platforms: [
         .iOS(.v11),
     ],
