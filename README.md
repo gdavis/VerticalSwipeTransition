@@ -73,11 +73,13 @@ That's it! Your modal will now dismiss with a swipe gesture when the scroll view
 #### Custom Presentation Controllers
 The `TransitionController` supports custom presentation controllers for when you need to control frame of the presented view, or need to add custom animations that occur outside of the transition itself. You can adopt the `PresentationControllerProvider` protocol to vend custom presentation controllers to the `TransitionController`. The example app uses a custom presentation controller to demonstrate this behavior.
 
+# Support & Contribution
+All code provided here is free to use, but I do not provide any help whatsoever to fix issues for your implementation. If you have a bug or feature request, please create a pull request that adjusts the code as you need it, and I will review the changes and consider making an update to the repository.
+
 # Credits
 All code was written by and developed [Grant Davis](https://grantdavisinteractive.com).
 
 A big thanks to [Daniel Gauthier](https://danielgauthier.me/) for writing articles on custom transitions, as well as providing [example code on github](https://github.com/danielmgauthier/ViewControllerTransitionExample).
 
-
 # License
-MIT License
+[MIT License](LICENSE)
