@@ -60,9 +60,6 @@ private extension VerticalSlideTransitionAnimator {
                                               curve: animationCurve)
         {
             destinationViewController.view.frame = finalDestinationFrame
-
-            let originViewScale: CGFloat = 0.95
-            originViewController.view.transform = CGAffineTransform(scaleX: originViewScale, y: originViewScale)
         }
 
         animator.addCompletion { _ in
@@ -73,8 +70,7 @@ private extension VerticalSlideTransitionAnimator {
     }
 
     func animateOut(_ transitionContext: UIViewControllerContextTransitioning) {
-        guard let originViewController = transitionContext.viewController(forKey: UITransitionContextViewControllerKey.from),
-              let destinationViewController = transitionContext.viewController(forKey: UITransitionContextViewControllerKey.to)
+        guard let originViewController = transitionContext.viewController(forKey: UITransitionContextViewControllerKey.from)
         else {
             assertionFailure()
             return
@@ -89,7 +85,6 @@ private extension VerticalSlideTransitionAnimator {
                                               curve: animationCurve)
         {
             originViewController.view.frame = finalFrame
-            destinationViewController.view.transform = .identity
         }
 
         animator.addCompletion { _ in
