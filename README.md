@@ -13,7 +13,9 @@ This is a sample project that demonstrates using a custom transition to perform 
 - Supports customization of transition metrics, such as customizing the frame, vertical position of swipes, and max y position limits
 
 # Installation
-This project is installable as a Swift Package. 
+This project is installable as a Swift Package. [Follow the instructions here](https://developer.apple.com/documentation/swift_packages/adding_package_dependencies_to_your_app) if you are new to Swift Package Manager.
+
+> git@github.com:gdavis/VerticalSwipeTransition.git
 
 # Usage
 #### Getting Started
