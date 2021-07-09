@@ -8,7 +8,6 @@
 import Foundation
 import UIKit
 
-
 ///
 /// Gesture that only handles swipes in a given direction.
 /// When a gesture occurs in the direction the gesture is not
@@ -16,7 +15,12 @@ import UIKit
 ///
 /// This gesture recognizer is used to only allow interactive
 /// pan gestures in a single direction, typically configured in
-/// the `down` direction.
+/// the `down` direction. It is used in conjunction with the
+/// interaction controller which acts as the delegate for the
+/// gesture. The gesture then provides interactivity only
+/// when we are dragging in a down direction for dismissal,
+/// and only allowed to start when a content scroll view
+/// is scrolled to the top of its content.
 ///
 class VerticalPanGestureRecognizer: UIPanGestureRecognizer {
 
@@ -42,23 +46,16 @@ class VerticalPanGestureRecognizer: UIPanGestureRecognizer {
 
         let currentPoint = touch.location(in: view)
         let previousPoint = touch.previousLocation(in: view)
-
         let deltaY = previousPoint.y - currentPoint.y
-        print("deltaY: \(deltaY)")
 
         switch direction {
         case .up:
             if deltaY < 0 {
                 state = .failed
-            } else {
-                print("moving up")
             }
         case .down:
             if deltaY > 0 {
-                // going down
                 state = .failed
-            } else {
-                print("moving down")
             }
         }
     }
