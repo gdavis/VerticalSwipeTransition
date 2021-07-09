@@ -74,9 +74,7 @@
 				7764073E26968556002ED665 /* ViewController.swift */,
 				7764074E2696866F002ED665 /* ModalViewController.swift */,
 				7764074026968556002ED665 /* Main.storyboard */,
-				7764074326968557002ED665 /* Assets.xcassets */,
-				7764074526968557002ED665 /* LaunchScreen.storyboard */,
-				7764074826968557002ED665 /* Info.plist */,
+				7795EC7B2697C62C00479254 /* Supporting Files */,
 			);
 			path = VerticalSwipeTransition;
 			sourceTree = "<group>";
@@ -99,6 +97,16 @@
 				7764075A2696ACA7002ED665 /* InteractionControlling.swift */,
 			);
 			path = Protocols;
+			sourceTree = "<group>";
+		};
+		7795EC7B2697C62C00479254 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				7764074326968557002ED665 /* Assets.xcassets */,
+				7764074526968557002ED665 /* LaunchScreen.storyboard */,
+				7764074826968557002ED665 /* Info.plist */,
+			);
+			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

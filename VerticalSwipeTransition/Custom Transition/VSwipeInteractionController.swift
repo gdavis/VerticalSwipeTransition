@@ -8,7 +8,6 @@
 import Foundation
 import UIKit
 
-// TODO:(grant) Add ability to cancel a transition with a velocity in the opposite direction of success.
 // TODO:(grant) Scroll view support
 // TODO:(grant) Support initial offset option (so we don't always start at the bottom of the screen, perhaps behind another view as well)
 
@@ -69,7 +68,7 @@ private protocol VSwipeMetric {
 /// Object that controls user input during an interactive transition.
 class VSwipeInteractionController: NSObject, InteractionControlling {
 
-    private class PresentationMetrics: VSwipeMetric {
+    class PresentationMetrics: VSwipeMetric {
         func targetViewController(transitionContext: UIViewControllerContextTransitioning) -> UIViewController? {
             transitionContext.viewController(forKey: .to)
         }
@@ -91,7 +90,10 @@ class VSwipeInteractionController: NSObject, InteractionControlling {
         }
 
         func shouldFinishTransition(progress: CGFloat, velocity: CGFloat) -> Bool {
-            progress > 0.5 || velocity < -300
+            // if the user has panned quickly in the opposite direction, cancel.
+            if velocity > 300 { return false }
+
+            return progress > 0.5 || velocity < -300
         }
 
         func interruptionTranslation(transitionContext: UIViewControllerContextTransitioning) -> CGFloat {
@@ -107,7 +109,7 @@ class VSwipeInteractionController: NSObject, InteractionControlling {
         }
     }
 
-    private class DismissalMetrics: VSwipeMetric {
+    class DismissalMetrics: VSwipeMetric {
         func targetViewController(transitionContext: UIViewControllerContextTransitioning) -> UIViewController? {
             transitionContext.viewController(forKey: .from)
         }
@@ -132,7 +134,10 @@ class VSwipeInteractionController: NSObject, InteractionControlling {
         }
 
         func shouldFinishTransition(progress: CGFloat, velocity: CGFloat) -> Bool {
-            progress > 0.5 || velocity > 300
+            // if the user has panned quickly in the opposite direction, cancel.
+            if velocity < -300 { return false }
+
+            return progress > 0.5 || velocity > 300
         }
 
         func interruptionTranslation(transitionContext: UIViewControllerContextTransitioning) -> CGFloat {
