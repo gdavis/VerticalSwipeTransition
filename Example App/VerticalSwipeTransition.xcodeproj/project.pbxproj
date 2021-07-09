@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		771607FC269905CA00B68D3F /* VSwipePresentationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 771607FB269905CA00B68D3F /* VSwipePresentationController.swift */; };
+		774791B126990CE3004C8C57 /* GDIVerticalSwipeTransition in Frameworks */ = {isa = PBXBuildFile; productRef = 774791B026990CE3004C8C57 /* GDIVerticalSwipeTransition */; };
 		7764073B26968556002ED665 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7764073A26968556002ED665 /* AppDelegate.swift */; };
 		7764073D26968556002ED665 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7764073C26968556002ED665 /* SceneDelegate.swift */; };
 		7764073F26968556002ED665 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7764073E26968556002ED665 /* ViewController.swift */; };
@@ -40,6 +41,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				779FE1382699092900B30212 /* GDIVerticalSwipeTransition in Frameworks */,
+				774791B126990CE3004C8C57 /* GDIVerticalSwipeTransition in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -130,6 +132,7 @@
 			name = VerticalSwipeTransition;
 			packageProductDependencies = (
 				779FE1372699092900B30212 /* GDIVerticalSwipeTransition */,
+				774791B026990CE3004C8C57 /* GDIVerticalSwipeTransition */,
 			);
 			productName = VerticalSwipeTransition;
 			productReference = 7764073726968556002ED665 /* VerticalSwipeTransition.app */;
@@ -158,6 +161,9 @@
 				Base,
 			);
 			mainGroup = 7764072E26968556002ED665;
+			packageReferences = (
+				774791AF26990CE3004C8C57 /* XCRemoteSwiftPackageReference "VerticalSwipeTransition" */,
+			);
 			productRefGroup = 7764073826968556002ED665 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -393,7 +399,23 @@
 		};
 /* End XCConfigurationList section */
 
+/* Begin XCRemoteSwiftPackageReference section */
+		774791AF26990CE3004C8C57 /* XCRemoteSwiftPackageReference "VerticalSwipeTransition" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "git@github.com:gdavis/VerticalSwipeTransition.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.0.2;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
 /* Begin XCSwiftPackageProductDependency section */
+		774791B026990CE3004C8C57 /* GDIVerticalSwipeTransition */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 774791AF26990CE3004C8C57 /* XCRemoteSwiftPackageReference "VerticalSwipeTransition" */;
+			productName = GDIVerticalSwipeTransition;
+		};
 		779FE1372699092900B30212 /* GDIVerticalSwipeTransition */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = GDIVerticalSwipeTransition;
