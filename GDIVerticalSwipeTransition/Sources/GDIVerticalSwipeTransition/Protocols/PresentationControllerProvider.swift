@@ -10,6 +10,6 @@ import UIKit
 
 /// Protocol that allows conforming objects to provide a custom
 /// presentation controller that will be used during a view controller transition.
-protocol PresentationControllerProvider {
+public protocol PresentationControllerProvider {
     func presentationController(forPresented presented: UIViewController, presenting: UIViewController?, source: UIViewController) -> UIPresentationController
 }

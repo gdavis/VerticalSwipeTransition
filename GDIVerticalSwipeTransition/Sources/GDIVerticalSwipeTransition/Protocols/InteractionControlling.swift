@@ -8,12 +8,12 @@
 import Foundation
 import UIKit
 
-enum InteractionPhase {
+public enum InteractionPhase {
     case presenting
     case dismissing
 }
 
-protocol InteractionControlling: UIViewControllerInteractiveTransitioning {
+public protocol InteractionControlling: UIViewControllerInteractiveTransitioning {
 
     var interactionPhase: InteractionPhase? { get set }
 

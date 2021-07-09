@@ -16,12 +16,12 @@ import UIKit
 /// Also defines the interaction controller to use to
 /// handle interactive transitions during both the presentation and dismissal.
 ///
-class TransitionController<Animator: TransitionAnimator>: NSObject, UIViewControllerTransitioningDelegate {
+open class TransitionController<Animator: TransitionAnimator>: NSObject, UIViewControllerTransitioningDelegate {
 
     // MARK: - Properties
 
-    var interactionController: InteractionControlling?
-    var presentationControllerProvider: PresentationControllerProvider?
+    open var interactionController: InteractionControlling?
+    open var presentationControllerProvider: PresentationControllerProvider?
     
 
     // MARK: - Initialization
@@ -33,7 +33,7 @@ class TransitionController<Animator: TransitionAnimator>: NSObject, UIViewContro
     ///                            from a user and control the transition.
     ///   - presentationControllerProvider: An optional presentation controller provider that vends custom presentation controllers
     ///                                     that manipulates the presentation views outside of the transition.
-    init(interactionController: InteractionControlling? = nil, presentationControllerProvider: PresentationControllerProvider? = nil) {
+    public init(interactionController: InteractionControlling? = nil, presentationControllerProvider: PresentationControllerProvider? = nil) {
         self.interactionController = interactionController
         self.presentationControllerProvider = presentationControllerProvider
     }
@@ -41,19 +41,19 @@ class TransitionController<Animator: TransitionAnimator>: NSObject, UIViewContro
 
     // MARK: - <UIViewControllerTransitioningDelegate>
 
-    func presentationController(forPresented presented: UIViewController, presenting: UIViewController?, source: UIViewController) -> UIPresentationController? {
+    open func presentationController(forPresented presented: UIViewController, presenting: UIViewController?, source: UIViewController) -> UIPresentationController? {
         presentationControllerProvider?.presentationController(forPresented: presented, presenting: presenting, source: source)
     }
 
-    func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+    open func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
         Animator(presenting: true)
     }
 
-    func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+    open func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
         Animator(presenting: false)
     }
 
-    func interactionControllerForPresentation(using animator: UIViewControllerAnimatedTransitioning) -> UIViewControllerInteractiveTransitioning? {
+    open func interactionControllerForPresentation(using animator: UIViewControllerAnimatedTransitioning) -> UIViewControllerInteractiveTransitioning? {
         guard let interactionController = interactionController else { return nil }
 
         interactionController.interactionPhase = .presenting
@@ -61,7 +61,7 @@ class TransitionController<Animator: TransitionAnimator>: NSObject, UIViewContro
         return interactionController
     }
 
-    func interactionControllerForDismissal(using animator: UIViewControllerAnimatedTransitioning) -> UIViewControllerInteractiveTransitioning? {
+    open func interactionControllerForDismissal(using animator: UIViewControllerAnimatedTransitioning) -> UIViewControllerInteractiveTransitioning? {
         guard let interactionController = interactionController,
               interactionController.isInteractionInProgress
         else {

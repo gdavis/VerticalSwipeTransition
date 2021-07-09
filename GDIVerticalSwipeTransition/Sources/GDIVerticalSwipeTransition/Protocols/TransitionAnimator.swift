@@ -8,6 +8,6 @@
 import Foundation
 import UIKit
 
-protocol TransitionAnimator: UIViewControllerAnimatedTransitioning {
+public protocol TransitionAnimator: UIViewControllerAnimatedTransitioning {
     init(presenting: Bool)
 }

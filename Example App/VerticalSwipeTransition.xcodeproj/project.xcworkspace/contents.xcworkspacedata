@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Workspace
+   version = "1.0">
+   <Group
+      location = "group:../.."
+      name = "..">
+      <FileRef
+         location = "group:LICENSE">
+      </FileRef>
+      <Group
+         location = "group:Tests"
+         name = "Tests">
+         <Group
+            location = "group:GDIVerticalSwipeTransitionTests"
+            name = "GDIVerticalSwipeTransitionTests">
+            <FileRef
+               location = "group:GDIVerticalSwipeTransitionTests.swift">
+            </FileRef>
+         </Group>
+      </Group>
+      <FileRef
+         location = "group:README.md">
+      </FileRef>
+      <FileRef
+         location = "group:Package.swift">
+      </FileRef>
+      <Group
+         location = "group:Sources"
+         name = "Sources">
+         <Group
+            location = "group:GDIVerticalSwipeTransition"
+            name = "GDIVerticalSwipeTransition">
+            <Group
+               location = "group:Vertical Swipe Transition"
+               name = "Vertical Swipe Transition">
+               <FileRef
+                  location = "group:VSwipeTransitionAnimator.swift">
+               </FileRef>
+               <FileRef
+                  location = "group:VSwipeGestureRecognizer.swift">
+               </FileRef>
+               <FileRef
+                  location = "group:VSwipeInteractionController.swift">
+               </FileRef>
+            </Group>
+            <FileRef
+               location = "group:TransitionController.swift">
+            </FileRef>
+            <Group
+               location = "group:Protocols"
+               name = "Protocols">
+               <FileRef
+                  location = "group:PresentationControllerProvider.swift">
+               </FileRef>
+               <FileRef
+                  location = "group:TransitionAnimator.swift">
+               </FileRef>
+               <FileRef
+                  location = "group:InteractionControlling.swift">
+               </FileRef>
+            </Group>
+         </Group>
+      </Group>
+      <Group
+         location = "group:Example App"
+         name = "Example App">
+         <Group
+            location = "group:VerticalSwipeTransition"
+            name = "VerticalSwipeTransition">
+            <FileRef
+               location = "group:ViewController.swift">
+            </FileRef>
+            <Group
+               location = "group:Assets.xcassets"
+               name = "Assets.xcassets">
+               <Group
+                  location = "group:AppIcon.appiconset"
+                  name = "AppIcon.appiconset">
+                  <FileRef
+                     location = "group:Contents.json">
+                  </FileRef>
+               </Group>
+               <Group
+                  location = "group:AccentColor.colorset"
+                  name = "AccentColor.colorset">
+                  <FileRef
+                     location = "group:Contents.json">
+                  </FileRef>
+               </Group>
+               <FileRef
+                  location = "group:Contents.json">
+               </FileRef>
+            </Group>
+            <Group
+               location = "group:Base.lproj"
+               name = "Base.lproj">
+               <FileRef
+                  location = "group:LaunchScreen.storyboard">
+               </FileRef>
+               <FileRef
+                  location = "group:Main.storyboard">
+               </FileRef>
+            </Group>
+            <FileRef
+               location = "group:VSwipePresentationController.swift">
+            </FileRef>
+            <Group
+               location = "group:Application"
+               name = "Application">
+               <FileRef
+                  location = "group:AppDelegate.swift">
+               </FileRef>
+               <FileRef
+                  location = "group:SceneDelegate.swift">
+               </FileRef>
+            </Group>
+            <FileRef
+               location = "group:Info.plist">
+            </FileRef>
+            <Group
+               location = "group:Custom Transition"
+               name = "Custom Transition">
+               <FileRef
+                  location = "group:VerticalSwipeDismissalController.swift">
+               </FileRef>
+            </Group>
+            <Group
+               location = "group:Modal View"
+               name = "Modal View">
+               <FileRef
+                  location = "group:ModalViewController.swift">
+               </FileRef>
+               <FileRef
+                  location = "group:ModalView.storyboard">
+               </FileRef>
+            </Group>
+         </Group>
+         <FileRef
+            location = "group:VerticalSwipeTransition.xcodeproj">
+         </FileRef>
+      </Group>
+   </Group>
+   <FileRef
+      location = "self:">
+   </FileRef>
+</Workspace>

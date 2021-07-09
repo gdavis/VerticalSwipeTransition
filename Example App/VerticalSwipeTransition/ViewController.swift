@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import GDIVerticalSwipeTransition
 
 class ViewController: UIViewController {
 
@@ -21,7 +22,7 @@ class ViewController: UIViewController {
     // Stores the object that manages the entire transition process.
     // The generic value defines the animation that is used for the transition,
     // and allows for a custom interaction controller as well.
-    lazy var transitionController = TransitionController<VerticalSlideTransitionAnimator>(
+    lazy var transitionController = TransitionController<VSwipeTransitionAnimator>(
         interactionController: interactionController
     )
 

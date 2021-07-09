@@ -1,5 +1,5 @@
 //
-//  VerticalPanGestureRecognizer.swift
+//  VSwipeGestureRecognizer.swift
 //  VerticalSwipeTransition
 //
 //  Created by Grant Davis on 7/9/21.
@@ -22,21 +22,21 @@ import UIKit
 /// and only allowed to start when a content scroll view
 /// is scrolled to the top of its content.
 ///
-class VerticalPanGestureRecognizer: UIPanGestureRecognizer {
+open class VSwipeGestureRecognizer: UIPanGestureRecognizer {
 
-    enum Direction {
+    public enum Direction {
         case up, down
     }
 
-    var direction: Direction
+    open var direction: Direction
 
-    init(direction: Direction, target: Any?, action: Selector?) {
+    public init(direction: Direction, target: Any?, action: Selector?) {
         self.direction = direction
 
         super.init(target: target, action: action)
     }
 
-    override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent) {
+    open override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent) {
         super.touchesMoved(touches, with: event)
 
         guard state != .failed,

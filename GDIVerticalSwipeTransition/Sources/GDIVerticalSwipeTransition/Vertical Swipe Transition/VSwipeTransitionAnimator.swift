@@ -1,5 +1,5 @@
 //
-//  VerticalSlideTransitionAnimator.swift
+//  VSwipeTransitionAnimator.swift
 //  VerticalSwipeTransition
 //
 //  Created by Grant Davis on 7/7/21.
@@ -13,21 +13,21 @@ import UIKit
 /// the presented view on-screen from the bottom of the presenting view
 /// to the final view frame defined by the presentation controller.
 ///
-class VerticalSlideTransitionAnimator: NSObject, TransitionAnimator {
+open class VSwipeTransitionAnimator: NSObject, TransitionAnimator {
 
     let presenting: Bool
     let animationDuration: TimeInterval = 0.35
 
-    required init(presenting: Bool) {
+    public required init(presenting: Bool) {
         self.presenting = presenting
         super.init()
     }
 
-    func transitionDuration(using transitionContext: UIViewControllerContextTransitioning?) -> TimeInterval {
+    open func transitionDuration(using transitionContext: UIViewControllerContextTransitioning?) -> TimeInterval {
         animationDuration
     }
 
-    func animateTransition(using transitionContext: UIViewControllerContextTransitioning) {
+    open func animateTransition(using transitionContext: UIViewControllerContextTransitioning) {
         if presenting {
             animateIn(transitionContext)
         }
@@ -37,7 +37,7 @@ class VerticalSlideTransitionAnimator: NSObject, TransitionAnimator {
     }
 }
 
-private extension VerticalSlideTransitionAnimator {
+private extension VSwipeTransitionAnimator {
 
     func animateIn(_ transitionContext: UIViewControllerContextTransitioning) {
         guard let originViewController = transitionContext.viewController(forKey: UITransitionContextViewControllerKey.from),
