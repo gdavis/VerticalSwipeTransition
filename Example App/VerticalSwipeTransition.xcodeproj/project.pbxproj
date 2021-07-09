@@ -22,7 +22,6 @@
 /* Begin PBXFileReference section */
 		771607FB269905CA00B68D3F /* VSwipePresentationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VSwipePresentationController.swift; sourceTree = "<group>"; };
 		771607FF2699077500B68D3F /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../../README.md; sourceTree = "<group>"; };
-		77160803269908EE00B68D3F /* GDIVerticalSwipeTransition */ = {isa = PBXFileReference; lastKnownFileType = folder; name = GDIVerticalSwipeTransition; path = ../GDIVerticalSwipeTransition; sourceTree = "<group>"; };
 		7764073726968556002ED665 /* VerticalSwipeTransition.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VerticalSwipeTransition.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7764073A26968556002ED665 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7764073C26968556002ED665 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -66,7 +65,6 @@
 		7764072E26968556002ED665 = {
 			isa = PBXGroup;
 			children = (
-				77160803269908EE00B68D3F /* GDIVerticalSwipeTransition */,
 				7764073926968556002ED665 /* VerticalSwipeTransition */,
 				7764073826968556002ED665 /* Products */,
 				771607F82699035C00B68D3F /* Frameworks */,
