@@ -21,7 +21,7 @@
                                 <rect key="frame" x="0.0" y="804" width="414" height="92"/>
                                 <subviews>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="21t-u8-6CA">
-                                        <rect key="frame" x="177" y="9" width="60" height="8"/>
+                                        <rect key="frame" x="177" y="8.5" width="60" height="8"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="60" id="MuH-0p-bjC"/>
                                             <constraint firstAttribute="height" constant="24.5" id="pEf-3I-pZH"/>

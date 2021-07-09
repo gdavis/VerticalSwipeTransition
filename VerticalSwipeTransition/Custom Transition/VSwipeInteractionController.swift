@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-// TODO:(grant) Scroll view support
+// TODO:(grant) fix small jump when starting dismiss using presentation controller custom frame
 
 /// Protocol used to provide crutial metrics that
 /// determine how the interactive transition performs.
@@ -148,8 +148,6 @@ class VSwipeInteractionController: NSObject, InteractionControlling {
 
             return targetViewController.view.frame
                 .offsetBy(dx: 0, dy: transitionContext.containerView.frame.maxY)
-//            return CGRect(origin: CGPoint(x: targetViewController.view.frame.minX, y: transitionContext.containerView.frame.maxY),
-//                          size: targetViewController.view.frame.size)
         }
 
         func verticalPosition(transitionContext: UIViewControllerContextTransitioning, progress: CGFloat, interactionDistance: CGFloat) -> CGFloat {
@@ -212,8 +210,20 @@ class VSwipeInteractionController: NSObject, InteractionControlling {
     // The view controller that is being presented by the transition.
     private(set) weak var targetViewController: UIViewController?
 
-    // TODO:(grant) finish scroll view support
-    private(set) weak var scrollView: UIScrollView?
+    /// The scroll view that adjusts when a dismissal gesture is invoked.
+    ///
+    /// Settings this property will adjust the interactive transition
+    /// to install a new one-day pan gesture that will only be tracked
+    /// when pulling down on the view to engage a dismissal behavior.
+    ///
+    /// The scroll view needs to be scroll to the top of its content
+    /// in order for the dismissal gesture to be recognized.
+    weak var scrollView: UIScrollView? {
+        didSet {
+            scrollView?.addGestureRecognizer(scrollViewPanGesture)
+            scrollView?.panGestureRecognizer.require(toFail: scrollViewPanGesture)
+        }
+    }
 
     // Boolean that determines if this controller is currently
     // engaged in an interactive transition.
@@ -249,6 +259,13 @@ class VSwipeInteractionController: NSObject, InteractionControlling {
     private lazy var interactionGesture: UIPanGestureRecognizer = {
         let gesture = UIPanGestureRecognizer(target: self, action: #selector(gestureAction(_:)))
         gesture.delaysTouchesBegan = false
+        return gesture
+    }()
+
+    private lazy var scrollViewPanGesture: UIPanGestureRecognizer = {
+        let gesture = VerticalPanGestureRecognizer(direction: .down, target: self, action: #selector(gestureAction(_:)))
+        gesture.delaysTouchesBegan = false
+        gesture.delegate = self
         return gesture
     }()
 }
@@ -593,8 +610,16 @@ private extension VSwipeInteractionController {
 
 
 extension VSwipeInteractionController: UIGestureRecognizerDelegate {
-
+    /// Determines if the interactive one-way pan gesture should begin
+    /// recognizing. The one-way gesture will fail if pulled in the direction
+    /// it is not configured for, and this method will only allow it to begin
+    /// if the scroll view is positioned at the top of its content.
+    ///
+    /// This results in a gesture that only invokes when the scroll view is
+    /// at the top of its content, and the gesture is pulling down to dismiss.
     func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
+        // if a scroll view has been configured, only allow it to begin
+        // a dismissal action if the scroll view is scrolled to the top of its content.
         if let scrollView = scrollView {
             return scrollView.contentOffset.y <= 0
         }

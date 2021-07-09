@@ -20,6 +20,8 @@
 		7764075B2696ACA7002ED665 /* InteractionControlling.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7764075A2696ACA7002ED665 /* InteractionControlling.swift */; };
 		7795EC7D2697D76700479254 /* VSwipePresentationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7795EC7C2697D76700479254 /* VSwipePresentationController.swift */; };
 		77A2AF27269792890088271A /* TransitionAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77A2AF26269792890088271A /* TransitionAnimator.swift */; };
+		77D296DD2698AC0B0046FFF2 /* ModalView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 77D296DC2698AC0B0046FFF2 /* ModalView.storyboard */; };
+		77D296DF2698B27B0046FFF2 /* VerticalPanGestureRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77D296DE2698B27B0046FFF2 /* VerticalPanGestureRecognizer.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -38,6 +40,8 @@
 		7764075A2696ACA7002ED665 /* InteractionControlling.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InteractionControlling.swift; sourceTree = "<group>"; };
 		7795EC7C2697D76700479254 /* VSwipePresentationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VSwipePresentationController.swift; sourceTree = "<group>"; };
 		77A2AF26269792890088271A /* TransitionAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransitionAnimator.swift; sourceTree = "<group>"; };
+		77D296DC2698AC0B0046FFF2 /* ModalView.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ModalView.storyboard; sourceTree = "<group>"; };
+		77D296DE2698B27B0046FFF2 /* VerticalPanGestureRecognizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerticalPanGestureRecognizer.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -70,11 +74,11 @@
 		7764073926968556002ED665 /* VerticalSwipeTransition */ = {
 			isa = PBXGroup;
 			children = (
+				77D296DB2698ABF30046FFF2 /* Modal View */,
 				7764075026968ABC002ED665 /* Custom Transition */,
 				7764073A26968556002ED665 /* AppDelegate.swift */,
 				7764073C26968556002ED665 /* SceneDelegate.swift */,
 				7764073E26968556002ED665 /* ViewController.swift */,
-				7764074E2696866F002ED665 /* ModalViewController.swift */,
 				7764074026968556002ED665 /* Main.storyboard */,
 				7795EC7B2697C62C00479254 /* Supporting Files */,
 			);
@@ -89,6 +93,7 @@
 				7764075526968AF4002ED665 /* VerticalSlideTransitionAnimator.swift */,
 				776407572696AC81002ED665 /* VSwipeInteractionController.swift */,
 				7795EC7C2697D76700479254 /* VSwipePresentationController.swift */,
+				77D296DE2698B27B0046FFF2 /* VerticalPanGestureRecognizer.swift */,
 			);
 			path = "Custom Transition";
 			sourceTree = "<group>";
@@ -110,6 +115,15 @@
 				7764074826968557002ED665 /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		77D296DB2698ABF30046FFF2 /* Modal View */ = {
+			isa = PBXGroup;
+			children = (
+				7764074E2696866F002ED665 /* ModalViewController.swift */,
+				77D296DC2698AC0B0046FFF2 /* ModalView.storyboard */,
+			);
+			path = "Modal View";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -172,6 +186,7 @@
 				7764074726968557002ED665 /* LaunchScreen.storyboard in Resources */,
 				7764074426968557002ED665 /* Assets.xcassets in Resources */,
 				7764074226968556002ED665 /* Main.storyboard in Resources */,
+				77D296DD2698AC0B0046FFF2 /* ModalView.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -191,6 +206,7 @@
 				7764075226968AC9002ED665 /* TransitionController.swift in Sources */,
 				77A2AF27269792890088271A /* TransitionAnimator.swift in Sources */,
 				776407582696AC81002ED665 /* VSwipeInteractionController.swift in Sources */,
+				77D296DF2698B27B0046FFF2 /* VerticalPanGestureRecognizer.swift in Sources */,
 				7764073D26968556002ED665 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

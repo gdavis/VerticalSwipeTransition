@@ -46,7 +46,17 @@ class ViewController: UIViewController {
 
         print("presenting view controller")
 
-        let viewController = ModalViewController()
+        guard let viewController = ModalViewController.instantiateFromStoryboard() as? UINavigationController,
+              let modalViewController = viewController.topViewController as? ModalViewController
+        else {
+            assertionFailure()
+            return
+        }
+
+        // tell the interaction controller to handle dismissal from the table view
+        // when it is scrolled to the top of its content
+        interactionController.scrollView = modalViewController.tableView
+
         viewController.transitioningDelegate = transitionController
         viewController.modalPresentationStyle = .custom
         present(viewController, animated: true, completion: nil)
