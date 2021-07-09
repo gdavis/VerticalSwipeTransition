@@ -8,6 +8,7 @@
 import Foundation
 import UIKit
 
+// TODO:(grant) Add limits for max y position
 // TODO:(grant) Scroll view support
 // TODO:(grant) Support initial offset option (so we don't always start at the bottom of the screen, perhaps behind another view as well)
 
@@ -26,7 +27,11 @@ import UIKit
 /// math should be different when going between
 /// the presentation and dismissal of a view.
 ///
-private protocol VSwipeMetric {
+protocol VSwipeMetric {
+    /// Inset value that pushes up the starting position of the presented view.
+    /// Also adjusts the end position.
+    var bottomInset: CGFloat { get set }
+
     /// Provides the view controller that is the target for the pan slide transition.
     /// This is the "to" view duration presentation, and the "from" view on dismissal.
     /// - Parameter transitionContext: The context information for the transition.
@@ -69,6 +74,9 @@ private protocol VSwipeMetric {
 class VSwipeInteractionController: NSObject, InteractionControlling {
 
     class PresentationMetrics: VSwipeMetric {
+
+        var bottomInset: CGFloat = 0
+
         func targetViewController(transitionContext: UIViewControllerContextTransitioning) -> UIViewController? {
             transitionContext.viewController(forKey: .to)
         }
@@ -76,12 +84,16 @@ class VSwipeInteractionController: NSObject, InteractionControlling {
         func initialPresentationFrame(transitionContext: UIViewControllerContextTransitioning) -> CGRect? {
             guard let presentedViewController = transitionContext.viewController(forKey: .to) else { return nil }
             let containerFrame = transitionContext.containerView.frame
-            return CGRect(origin: CGPoint(x: containerFrame.minX, y: containerFrame.maxY), size: presentedViewController.view.frame.size)
+            let frame = CGRect(origin: CGPoint(x: containerFrame.minX, y: containerFrame.maxY), size: presentedViewController.view.frame.size)
+
+            return frame.offsetBy(dx: 0, dy: bottomInset)
         }
 
         func finalPresentationFrame(transitionContext: UIViewControllerContextTransitioning) -> CGRect? {
             guard let presentedViewController = transitionContext.viewController(forKey: .to) else { return nil }
-            return transitionContext.finalFrame(for: presentedViewController)
+            let frame = transitionContext.finalFrame(for: presentedViewController)
+
+            return frame.offsetBy(dx: 0, dy: bottomInset)
         }
 
         func verticalPosition(transitionContext: UIViewControllerContextTransitioning, progress: CGFloat, interactionDistance: CGFloat) -> CGFloat {
@@ -110,26 +122,31 @@ class VSwipeInteractionController: NSObject, InteractionControlling {
     }
 
     class DismissalMetrics: VSwipeMetric {
+
+        var bottomInset: CGFloat = 0
+
         func targetViewController(transitionContext: UIViewControllerContextTransitioning) -> UIViewController? {
             transitionContext.viewController(forKey: .from)
         }
 
         func initialPresentationFrame(transitionContext: UIViewControllerContextTransitioning) -> CGRect? {
             guard let dismissedViewController = transitionContext.viewController(forKey: .from) else { return nil }
-            return transitionContext.initialFrame(for: dismissedViewController)
+            let frame = transitionContext.initialFrame(for: dismissedViewController)
+
+            return frame.offsetBy(dx: 0, dy: bottomInset)
         }
 
         func finalPresentationFrame(transitionContext: UIViewControllerContextTransitioning) -> CGRect? {
             guard let targetViewController = transitionContext.viewController(forKey: .from) else { return nil }
+            let frame = CGRect(origin: CGPoint(x: targetViewController.view.frame.minX, y: transitionContext.containerView.frame.maxY),
+                               size: targetViewController.view.frame.size)
 
-            return CGRect(origin: CGPoint(x: targetViewController.view.frame.minX, y: transitionContext.containerView.frame.maxY),
-                          size: targetViewController.view.frame.size)
+            return frame.offsetBy(dx: 0, dy: bottomInset)
         }
 
         func verticalPosition(transitionContext: UIViewControllerContextTransitioning, progress: CGFloat, interactionDistance: CGFloat) -> CGFloat {
-            guard let targetViewController = transitionContext.viewController(forKey: .from) else { return 0 }
+            guard let initialFrame = initialPresentationFrame(transitionContext: transitionContext) else { return 0 }
 
-            let initialFrame = transitionContext.initialFrame(for: targetViewController)
             return initialFrame.minY + interactionDistance * progress
         }
 
@@ -142,6 +159,7 @@ class VSwipeInteractionController: NSObject, InteractionControlling {
 
         func interruptionTranslation(transitionContext: UIViewControllerContextTransitioning) -> CGFloat {
             guard let targetViewController = transitionContext.viewController(forKey: .from) else { return 0 }
+            
             return -targetViewController.view.frame.minY
         }
 
@@ -169,10 +187,10 @@ class VSwipeInteractionController: NSObject, InteractionControlling {
     }
 
     // Object that provides the presentation metrics for the transition.
-    private lazy var presentationMetrics: VSwipeMetric = PresentationMetrics()
+    lazy var presentationMetrics: VSwipeMetric = PresentationMetrics()
 
     // Object that provides the dismissal metrics for the transition.
-    private lazy var dismissalMetrics: VSwipeMetric = DismissalMetrics()
+    lazy var dismissalMetrics: VSwipeMetric = DismissalMetrics()
 
     // The duration for the finish and cancel animations when a gesture's
     // interaction has finished and we animate to the final position.

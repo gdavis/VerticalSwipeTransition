@@ -27,6 +27,10 @@ class ViewController: UIViewController {
 
         // listen for the gesture's state to invoke presentation of the modal
         interactionController.externalGesture.addTarget(self, action: #selector(gestureAction))
+
+        // add a bottom inset that starts the gesture on the bottom button area
+        interactionController.presentationMetrics.bottomInset = -swipeView.frame.height
+        interactionController.dismissalMetrics.bottomInset = -swipeView.frame.height
     }
 
     @objc func gestureAction() {
