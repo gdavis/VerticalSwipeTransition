@@ -8,8 +8,6 @@
 import Foundation
 import UIKit
 
-// TODO:(grant) fix small jump when starting dismiss using presentation controller custom frame
-
 /// Protocol used to provide crutial metrics that
 /// determine how the interactive transition performs.
 ///
@@ -121,7 +119,9 @@ class VSwipeInteractionController: NSObject, InteractionControlling {
                   let targetViewController = transitionContext.viewController(forKey: .to)
             else { return 0 }
 
-            return finalFrame.height - targetViewController.view.frame.minY
+            // Note: adding the final frame's minY fixes a jump issue that occurs
+            // when using a custom presentation controller that insets the frame
+            return finalFrame.minY + finalFrame.height - targetViewController.view.frame.minY
         }
 
         func progress(verticalTranslation: CGFloat, interactionDistance: CGFloat) -> CGFloat {
@@ -169,9 +169,13 @@ class VSwipeInteractionController: NSObject, InteractionControlling {
         }
 
         func interruptionTranslation(transitionContext: UIViewControllerContextTransitioning) -> CGFloat {
-            guard let targetViewController = transitionContext.viewController(forKey: .from) else { return 0 }
-            
-            return -targetViewController.view.frame.minY
+            guard let targetViewController = transitionContext.viewController(forKey: .from),
+                  let initialFrame = initialPresentationFrame(transitionContext: transitionContext)
+            else { return 0 }
+
+            // Note: adding the intial frame's minY fixes a jump issue that occurs
+            // when using a custom presentation controller that insets the frame
+            return -targetViewController.view.frame.minY + initialFrame.minY
         }
 
         func progress(verticalTranslation: CGFloat, interactionDistance: CGFloat) -> CGFloat {
