@@ -25,7 +25,13 @@ import UIKit
 /// the presentation and dismissal of a view.
 ///
 protocol VSwipeMetric {
-
+    /// Optional value that limits the minimum y value of the
+    /// presented views frame during interaction.
+    ///
+    /// For example, a value of 0 will limit the interaction
+    /// to not be non-negative and stop the swipe gesture
+    /// from moving the above the presenting view frame.
+    ///
     var topMaxY: CGFloat? { get set }
 
     /// Provides the view controller that is the target for the pan slide transition.
