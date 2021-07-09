@@ -45,11 +45,11 @@ class ViewController: UIViewController {
     }
 
     @objc func gestureAction() {
-        // do not try to present again if an interaction is in progress.
+        // do not try to present again if a presentation is in progress.
         // without this, we would attempt to present the same view controller
         // multiple times while the transition is running, causing inconsistencies
         // in the view transition process.
-        guard interactionController.isInteractionInProgress == false else { return }
+        guard presentedViewController == nil else { return }
 
         guard let viewController = ModalViewController.instantiateFromStoryboard() as? UINavigationController,
               let modalViewController = viewController.topViewController as? ModalViewController
