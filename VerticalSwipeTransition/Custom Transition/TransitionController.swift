@@ -18,13 +18,28 @@ import UIKit
 ///
 class TransitionController<Animator: TransitionAnimator>: NSObject, UIViewControllerTransitioningDelegate {
 
-    let interactionController: InteractionControlling
-    var presentationControllerProvider: PresentationControllerProvider?
+    // MARK: - Properties
 
-    init(interactionController: InteractionControlling, presentationControllerProvider: PresentationControllerProvider? = nil) {
+    var interactionController: InteractionControlling?
+    var presentationControllerProvider: PresentationControllerProvider?
+    
+
+    // MARK: - Initialization
+
+    /// Creates a new `TransitionController` to manage transitions when displaying a view.
+    ///
+    /// - Parameters:
+    ///   - interactionController: An optional interaction controller that is used to handle interactive input
+    ///                            from a user and control the transition.
+    ///   - presentationControllerProvider: An optional presentation controller provider that vends custom presentation controllers
+    ///                                     that manipulates the presentation views outside of the transition.
+    init(interactionController: InteractionControlling? = nil, presentationControllerProvider: PresentationControllerProvider? = nil) {
         self.interactionController = interactionController
         self.presentationControllerProvider = presentationControllerProvider
     }
+
+
+    // MARK: - <UIViewControllerTransitioningDelegate>
 
     func presentationController(forPresented presented: UIViewController, presenting: UIViewController?, source: UIViewController) -> UIPresentationController? {
         presentationControllerProvider?.presentationController(forPresented: presented, presenting: presenting, source: source)
@@ -39,14 +54,18 @@ class TransitionController<Animator: TransitionAnimator>: NSObject, UIViewContro
     }
 
     func interactionControllerForPresentation(using animator: UIViewControllerAnimatedTransitioning) -> UIViewControllerInteractiveTransitioning? {
+        guard let interactionController = interactionController else { return nil }
+
         interactionController.interactionPhase = .presenting
 
         return interactionController
     }
 
     func interactionControllerForDismissal(using animator: UIViewControllerAnimatedTransitioning) -> UIViewControllerInteractiveTransitioning? {
-        guard interactionController.isInteractionInProgress else {
-            interactionController.interactionPhase = nil
+        guard let interactionController = interactionController,
+              interactionController.isInteractionInProgress
+        else {
+            interactionController?.interactionPhase = nil
             return nil
         }
 
