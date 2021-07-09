@@ -8,6 +8,11 @@
 import Foundation
 import UIKit
 
+///
+/// Animator that performs a vertical slide transition to bring
+/// the presented view on-screen from the bottom of the presenting view
+/// to the final view frame defined by the presentation controller.
+///
 class VerticalSlideTransitionAnimator: NSObject, TransitionAnimator {
 
     let presenting: Bool

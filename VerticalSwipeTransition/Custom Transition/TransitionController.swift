@@ -8,10 +8,14 @@
 import Foundation
 import UIKit
 
-protocol PresentationControllerProvider {
-    func presentationController(forPresented presented: UIViewController, presenting: UIViewController?, source: UIViewController) -> UIPresentationController
-}
-
+///
+/// Object that controls the transition by vending the animation to use for
+/// presentation and dismissal. Animation objects are created when requested
+/// and configured for presentation or dismissal.
+///
+/// Also defines the interaction controller to use to
+/// handle interactive transitions during both the presentation and dismissal.
+///
 class TransitionController<Animator: TransitionAnimator>: NSObject, UIViewControllerTransitioningDelegate {
 
     let interactionController: InteractionControlling

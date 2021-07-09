@@ -30,6 +30,7 @@ class VSwipePresentationController: UIPresentationController {
         let frame = containerView?.frame ?? super.frameOfPresentedViewInContainerView
         let topSafeArea = containerView?.safeAreaInsets.top ?? 0
 
+        // inset and offset the frame to place it over the content
         return frame
             .insetBy(dx: 10, dy: topSafeArea)
             .offsetBy(dx: 0, dy: topSafeArea)
@@ -37,13 +38,21 @@ class VSwipePresentationController: UIPresentationController {
 
     override func presentationTransitionWillBegin() {
         guard let transitionCoordinator = presentedViewController.transitionCoordinator,
-              let presentingView = presentingViewController.view
+              let presentingView = presentingViewController.view,
+              let presentedView = presentedView
         else { return }
 
+        // round the top left/right corners
+        presentedView.clipsToBounds = true
+        presentedView.layer.cornerRadius = 12
+        presentedView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
+
+        // show a dimming view in the presenting view
         presentingView.addSubview(dimmerView)
         dimmerView.frame = presentingView.frame
         dimmerView.alpha = 0
 
+        // fade in the dimmer with the transition
         transitionCoordinator.animate { [unowned self] context in
             self.dimmerView.alpha = 1
         } completion: { context in
