@@ -1,7 +1,7 @@
 # VerticalSwipeTransition
 An interactive, interruptible, and customizable vertical swipe transition for iOS. 
 
-![20210709123457252](https://user-images.githubusercontent.com/110691/125122262-66e4c000-e0b2-11eb-897a-848dcec27738.gif)
+![20210709131637050](https://user-images.githubusercontent.com/110691/125126323-25efaa00-e0b8-11eb-823f-c1af9c950b54.gif)
 
 This is a sample project that demonstrates using a custom transition to perform an interactive swipe to present and dismiss a view controller. The view controller is presented using a standard `present(_, animated:, completion)` method call, but implements a transitioning delegate to vend a custom animation and interaction controller.
 
