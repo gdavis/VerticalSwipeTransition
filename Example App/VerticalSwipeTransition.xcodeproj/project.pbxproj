@@ -3,12 +3,11 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 52;
+	objectVersion = 50;
 	objects = {
 
 /* Begin PBXBuildFile section */
 		771607FC269905CA00B68D3F /* VSwipePresentationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 771607FB269905CA00B68D3F /* VSwipePresentationController.swift */; };
-		774791B126990CE3004C8C57 /* GDIVerticalSwipeTransition in Frameworks */ = {isa = PBXBuildFile; productRef = 774791B026990CE3004C8C57 /* GDIVerticalSwipeTransition */; };
 		7764073B26968556002ED665 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7764073A26968556002ED665 /* AppDelegate.swift */; };
 		7764073D26968556002ED665 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7764073C26968556002ED665 /* SceneDelegate.swift */; };
 		7764073F26968556002ED665 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7764073E26968556002ED665 /* ViewController.swift */; };
@@ -16,7 +15,13 @@
 		7764074426968557002ED665 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7764074326968557002ED665 /* Assets.xcassets */; };
 		7764074726968557002ED665 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7764074526968557002ED665 /* LaunchScreen.storyboard */; };
 		7764074F2696866F002ED665 /* ModalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7764074E2696866F002ED665 /* ModalViewController.swift */; };
-		779FE1382699092900B30212 /* GDIVerticalSwipeTransition in Frameworks */ = {isa = PBXBuildFile; productRef = 779FE1372699092900B30212 /* GDIVerticalSwipeTransition */; };
+		77C9CBBF269973DD00EA5CB2 /* VSwipeTransitionAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77C9CBB7269973DD00EA5CB2 /* VSwipeTransitionAnimator.swift */; };
+		77C9CBC0269973DD00EA5CB2 /* VSwipeGestureRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77C9CBB8269973DD00EA5CB2 /* VSwipeGestureRecognizer.swift */; };
+		77C9CBC1269973DD00EA5CB2 /* VSwipeInteractionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77C9CBB9269973DD00EA5CB2 /* VSwipeInteractionController.swift */; };
+		77C9CBC2269973DD00EA5CB2 /* TransitionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77C9CBBA269973DD00EA5CB2 /* TransitionController.swift */; };
+		77C9CBC3269973DD00EA5CB2 /* PresentationControllerProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77C9CBBC269973DD00EA5CB2 /* PresentationControllerProvider.swift */; };
+		77C9CBC4269973DD00EA5CB2 /* TransitionAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77C9CBBD269973DD00EA5CB2 /* TransitionAnimator.swift */; };
+		77C9CBC5269973DD00EA5CB2 /* InteractionControlling.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77C9CBBE269973DD00EA5CB2 /* InteractionControlling.swift */; };
 		77D296DD2698AC0B0046FFF2 /* ModalView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 77D296DC2698AC0B0046FFF2 /* ModalView.storyboard */; };
 /* End PBXBuildFile section */
 
@@ -32,6 +37,13 @@
 		7764074626968557002ED665 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		7764074826968557002ED665 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7764074E2696866F002ED665 /* ModalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModalViewController.swift; sourceTree = "<group>"; };
+		77C9CBB7269973DD00EA5CB2 /* VSwipeTransitionAnimator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VSwipeTransitionAnimator.swift; sourceTree = "<group>"; };
+		77C9CBB8269973DD00EA5CB2 /* VSwipeGestureRecognizer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VSwipeGestureRecognizer.swift; sourceTree = "<group>"; };
+		77C9CBB9269973DD00EA5CB2 /* VSwipeInteractionController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VSwipeInteractionController.swift; sourceTree = "<group>"; };
+		77C9CBBA269973DD00EA5CB2 /* TransitionController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransitionController.swift; sourceTree = "<group>"; };
+		77C9CBBC269973DD00EA5CB2 /* PresentationControllerProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PresentationControllerProvider.swift; sourceTree = "<group>"; };
+		77C9CBBD269973DD00EA5CB2 /* TransitionAnimator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransitionAnimator.swift; sourceTree = "<group>"; };
+		77C9CBBE269973DD00EA5CB2 /* InteractionControlling.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InteractionControlling.swift; sourceTree = "<group>"; };
 		77D296DC2698AC0B0046FFF2 /* ModalView.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ModalView.storyboard; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -40,8 +52,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				779FE1382699092900B30212 /* GDIVerticalSwipeTransition in Frameworks */,
-				774791B126990CE3004C8C57 /* GDIVerticalSwipeTransition in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -84,6 +94,7 @@
 		7764073926968556002ED665 /* VerticalSwipeTransition */ = {
 			isa = PBXGroup;
 			children = (
+				77C9CBB4269973DD00EA5CB2 /* Sources */,
 				771607FF2699077500B68D3F /* README.md */,
 				771607FE269906D400B68D3F /* Application */,
 				77D296DB2698ABF30046FFF2 /* Modal View */,
@@ -103,6 +114,45 @@
 				7764074826968557002ED665 /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		77C9CBB4269973DD00EA5CB2 /* Sources */ = {
+			isa = PBXGroup;
+			children = (
+				77C9CBB5269973DD00EA5CB2 /* GDIVerticalSwipeTransition */,
+			);
+			name = Sources;
+			path = ../../Sources;
+			sourceTree = "<group>";
+		};
+		77C9CBB5269973DD00EA5CB2 /* GDIVerticalSwipeTransition */ = {
+			isa = PBXGroup;
+			children = (
+				77C9CBB6269973DD00EA5CB2 /* Vertical Swipe Transition */,
+				77C9CBBA269973DD00EA5CB2 /* TransitionController.swift */,
+				77C9CBBB269973DD00EA5CB2 /* Protocols */,
+			);
+			path = GDIVerticalSwipeTransition;
+			sourceTree = "<group>";
+		};
+		77C9CBB6269973DD00EA5CB2 /* Vertical Swipe Transition */ = {
+			isa = PBXGroup;
+			children = (
+				77C9CBB7269973DD00EA5CB2 /* VSwipeTransitionAnimator.swift */,
+				77C9CBB8269973DD00EA5CB2 /* VSwipeGestureRecognizer.swift */,
+				77C9CBB9269973DD00EA5CB2 /* VSwipeInteractionController.swift */,
+			);
+			path = "Vertical Swipe Transition";
+			sourceTree = "<group>";
+		};
+		77C9CBBB269973DD00EA5CB2 /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				77C9CBBC269973DD00EA5CB2 /* PresentationControllerProvider.swift */,
+				77C9CBBD269973DD00EA5CB2 /* TransitionAnimator.swift */,
+				77C9CBBE269973DD00EA5CB2 /* InteractionControlling.swift */,
+			);
+			path = Protocols;
 			sourceTree = "<group>";
 		};
 		77D296DB2698ABF30046FFF2 /* Modal View */ = {
@@ -131,8 +181,6 @@
 			);
 			name = VerticalSwipeTransition;
 			packageProductDependencies = (
-				779FE1372699092900B30212 /* GDIVerticalSwipeTransition */,
-				774791B026990CE3004C8C57 /* GDIVerticalSwipeTransition */,
 			);
 			productName = VerticalSwipeTransition;
 			productReference = 7764073726968556002ED665 /* VerticalSwipeTransition.app */;
@@ -162,7 +210,6 @@
 			);
 			mainGroup = 7764072E26968556002ED665;
 			packageReferences = (
-				774791AF26990CE3004C8C57 /* XCRemoteSwiftPackageReference "VerticalSwipeTransition" */,
 			);
 			productRefGroup = 7764073826968556002ED665 /* Products */;
 			projectDirPath = "";
@@ -192,11 +239,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				77C9CBC2269973DD00EA5CB2 /* TransitionController.swift in Sources */,
 				7764074F2696866F002ED665 /* ModalViewController.swift in Sources */,
+				77C9CBC3269973DD00EA5CB2 /* PresentationControllerProvider.swift in Sources */,
 				771607FC269905CA00B68D3F /* VSwipePresentationController.swift in Sources */,
+				77C9CBC1269973DD00EA5CB2 /* VSwipeInteractionController.swift in Sources */,
 				7764073F26968556002ED665 /* ViewController.swift in Sources */,
 				7764073B26968556002ED665 /* AppDelegate.swift in Sources */,
+				77C9CBC4269973DD00EA5CB2 /* TransitionAnimator.swift in Sources */,
 				7764073D26968556002ED665 /* SceneDelegate.swift in Sources */,
+				77C9CBC0269973DD00EA5CB2 /* VSwipeGestureRecognizer.swift in Sources */,
+				77C9CBC5269973DD00EA5CB2 /* InteractionControlling.swift in Sources */,
+				77C9CBBF269973DD00EA5CB2 /* VSwipeTransitionAnimator.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -398,29 +452,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCRemoteSwiftPackageReference section */
-		774791AF26990CE3004C8C57 /* XCRemoteSwiftPackageReference "VerticalSwipeTransition" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "git@github.com:gdavis/VerticalSwipeTransition.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 0.0.2;
-			};
-		};
-/* End XCRemoteSwiftPackageReference section */
-
-/* Begin XCSwiftPackageProductDependency section */
-		774791B026990CE3004C8C57 /* GDIVerticalSwipeTransition */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 774791AF26990CE3004C8C57 /* XCRemoteSwiftPackageReference "VerticalSwipeTransition" */;
-			productName = GDIVerticalSwipeTransition;
-		};
-		779FE1372699092900B30212 /* GDIVerticalSwipeTransition */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = GDIVerticalSwipeTransition;
-		};
-/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 7764072F26968556002ED665 /* Project object */;
 }

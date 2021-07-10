@@ -26,14 +26,21 @@ class ViewController: UIViewController {
         interactionController: interactionController
     )
 
+    lazy var tapGesture: UITapGestureRecognizer = {
+        let gesture = UITapGestureRecognizer(target: self, action: #selector(gestureAction))
+        return gesture
+    }()
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // take the interaction controller's guestre and add it to our invoking view
         swipeView.addGestureRecognizer(interactionController.externalGesture)
+        swipeView.addGestureRecognizer(tapGesture)
 
         // listen for the gesture's state to invoke presentation of the modal
         interactionController.externalGesture.addTarget(self, action: #selector(gestureAction))
+        interactionController.externalGesture.require(toFail: tapGesture)
 
         // prevent the view from going beyond the top (into negative y positions)
         interactionController.presentationMetrics.topMaxY = 0

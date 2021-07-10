@@ -296,7 +296,17 @@ public extension VSwipeInteractionController {
 
         self.targetViewController = currentMetric.targetViewController(transitionContext: transitionContext)
         self.transitionContext = transitionContext
-        self.isInteractionInProgress = true
+
+        // if we are starting the transition with no interaction,
+        // then we are being presented by a tap or button action.
+        if isInteractionInProgress == false {
+            // mark interaction as now enabled to allow for dismissal gestures.
+            self.isInteractionInProgress = true
+
+            // to act as a normal transition, invoke the finish transition
+            // for the transaction distance with no velocity.
+            performFinishTransition(GestureStatus(verticalTranslation: interactionDistance, velocity: .zero))
+        }
 
         // store frame and total travelled distance for later use
         presentedFinalFrame = currentMetric.finalPresentationFrame(transitionContext: transitionContext) ?? .zero
@@ -403,13 +413,15 @@ extension VSwipeInteractionController {
     private func gestureBegan(_ status: GestureStatus) {
         guard let transitionContext = transitionContext
         else {
+            if interactionPhase == .none || interactionPhase == .presenting {
+                // mark that we have started a new interactive transition
+                isInteractionInProgress = true
+            }
+
             // if we are currently in a presenting state but have no transition
             // context, then this gesture is triggering a new dismissal interaction
             if interactionPhase == .presenting {
                 print("Starting dismissal from pan gesture")
-
-                // mark that we have started a new interactive transition
-                isInteractionInProgress = true
 
                 // if we have a gesture starting, but we are not yet started a interactive transition,
                 // then we need to invoke the transition by calling `dismiss` on the target vc.
