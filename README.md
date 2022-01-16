@@ -30,7 +30,7 @@ The `TransitionController` takes a generic animation type that will be created w
 
 For interactivity, you must also provide an object conforming to `InteractionControlling` which defines a couple of properties that determines the current interaction phase of whether it is presenting or dismissing the view, and a boolean that defines if an interaction is currently in progress. For this demo app, we have a `VSwipeInteractionController` that conforms to this protocol that handles pan geture actions to update the transition as it updates the translation within the view. 
 
-To invoke a presentation of a view controller directly from a pan gesture, you use the gesture that is provided by the `VSwipeInteractionController`. You can add that gesture to the view you want a swipe to occur on to engage the presentation. The following code shows how to add the gesture to your view, and being your presentation:
+To invoke a presentation of a view controller directly from a pan gesture, you use the gesture that is provided by the `VSwipeInteractionController`. You can add that gesture to the view you want a swipe to occur on to engage the presentation. The following code shows how to add the gesture to your view, and begin your presentation:
 
 ```swift
 // take the interaction controller's guestre and add it to our invoking view
